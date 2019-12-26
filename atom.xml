@@ -90,9 +90,9 @@
       <category term="Linux" scheme="http://chason.me/categories/Linux/"/>
     
     
-      <category term="SSH" scheme="http://chason.me/tags/SSH/"/>
-    
       <category term="tiv" scheme="http://chason.me/tags/tiv/"/>
+    
+      <category term="SSH" scheme="http://chason.me/tags/SSH/"/>
     
       <category term="终端显示图片" scheme="http://chason.me/tags/%E7%BB%88%E7%AB%AF%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87/"/>
     
@@ -212,11 +212,11 @@
       <category term="Linux" scheme="http://chason.me/categories/Linux/"/>
     
     
+      <category term="Ubuntu" scheme="http://chason.me/tags/Ubuntu/"/>
+    
       <category term="TensorFlow" scheme="http://chason.me/tags/TensorFlow/"/>
     
       <category term="PyTorch" scheme="http://chason.me/tags/PyTorch/"/>
-    
-      <category term="Ubuntu" scheme="http://chason.me/tags/Ubuntu/"/>
     
       <category term="OpenCV" scheme="http://chason.me/tags/OpenCV/"/>
     
@@ -247,9 +247,9 @@
       <category term="Linux" scheme="http://chason.me/categories/Linux/"/>
     
     
-      <category term="screen" scheme="http://chason.me/tags/screen/"/>
-    
       <category term="SSH" scheme="http://chason.me/tags/SSH/"/>
+    
+      <category term="screen" scheme="http://chason.me/tags/screen/"/>
     
       <category term="VPS" scheme="http://chason.me/tags/VPS/"/>
     

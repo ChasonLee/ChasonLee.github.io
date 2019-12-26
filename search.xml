@@ -80,9 +80,9 @@
       
         <tags>
             
-            <tag> SSH </tag>
-            
             <tag> tiv </tag>
+            
+            <tag> SSH </tag>
             
             <tag> 终端显示图片 </tag>
             
@@ -208,11 +208,11 @@
       
         <tags>
             
+            <tag> Ubuntu </tag>
+            
             <tag> TensorFlow </tag>
             
             <tag> PyTorch </tag>
-            
-            <tag> Ubuntu </tag>
             
             <tag> OpenCV </tag>
             
@@ -245,9 +245,9 @@
       
         <tags>
             
-            <tag> screen </tag>
-            
             <tag> SSH </tag>
+            
+            <tag> screen </tag>
             
             <tag> VPS </tag>
             
