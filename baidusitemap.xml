@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://chason.me/docker-tutorial/</loc>
+    <lastmod>2019-12-24</lastmod>
+  </url>  <url>
+    <loc>http://chason.me/machine-learning-101/</loc>
+    <lastmod>2019-06-02</lastmod>
+  </url>  <url>
+    <loc>http://chason.me/virtualenv-tutorial/</loc>
+    <lastmod>2019-05-24</lastmod>
+  </url>  <url>
+    <loc>http://chason.me/tmux-tutorial/</loc>
+    <lastmod>2019-05-21</lastmod>
+  </url>  <url>
+    <loc>http://chason.me/how-to-display-images-in-the-terminal/</loc>
+    <lastmod>2019-05-19</lastmod>
+  </url>  <url>
+    <loc>http://chason.me/mounting-drives-in-linux/</loc>
+    <lastmod>2019-05-15</lastmod>
+  </url>  <url>
+    <loc>http://chason.me/server-configuration-tutorial/</loc>
+    <lastmod>2019-05-15</lastmod>
+  </url>  <url>
+    <loc>http://chason.me/screen-tutorial/</loc>
+    <lastmod>2019-05-15</lastmod>
+  </url>  <url>
+    <loc>http://chason.me/hello-world/</loc>
+    <lastmod>2017-05-10</lastmod>
+  </url>
+</urlset>
