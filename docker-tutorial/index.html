@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://chason.me/docker-tutorial/enter_docker.jpg">
 <meta property="og:image" content="http://chason.me/docker-tutorial/run_clock.jpg">
 <meta property="og:image" content="http://chason.me/docker-tutorial/htop.jpg">
-<meta property="og:updated_time" content="2019-12-24T16:11:45.625Z">
+<meta property="og:updated_time" content="2020-02-29T09:52:32.489Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker超详细教程">
 <meta name="twitter:description" content="¶简介 Docker的诞生，让应用的部署变得前所未有的高效，它能将应用及其依赖项打包成容器分发部署，从而保证了应用运行环境的一致性。Docker容器其实是一种比虚拟机更轻量的技术，容器中的进程直接运行在宿主机的内核，其启动速度十分快，基本可以做到秒级启动，并不像虚拟机那样对硬件进行模拟，并在之上运行一整套操作系统，所以容器相比虚拟机更为轻便。">
@@ -523,7 +523,8 @@ $ docker run -it ubuntu bash</p>
 <li><code>-o</code>参数后面接着输出文件名。</li>
 <li><code>chasonlee/ubuntu_demo</code>是需要导出的镜像名。</li>
 </ul>
-<h4 id="5-导入镜像"><a class="header-anchor" href="#5-导入镜像">¶</a>5、导入镜像</h4>
+<p>注意：这里只是导出一个静态的镜像，根据当前镜像启动的容器环境并不能直接导出，如果需要迁移当前容器的环境，还需要先使用<code>commit</code>命令自行制作一个镜像再导出，详情可跳转到<a href="http://chason.me/docker-tutorial/#%E4%B8%80-%E7%90%86%E8%A7%A3commit">理解commit</a>章节阅读。</p>
+<h4 id="5-导入镜像"><a class="header-anchor" href="#5-导入镜像">¶</a><em>5、导入镜像</em></h4>
 <p>然后拷贝此镜像文件到目标环境中，并导入镜像：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i ubuntu_demo.tar</span><br></pre></td></tr></table></figure>
 <p>导入后可以即可通过<code>docker images</code>查看镜像。</p>
@@ -593,17 +594,17 @@ $ docker run -it ubuntu bash</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm -f my_ubuntu</span><br></pre></td></tr></table></figure>
 <p>如果当前有很多已经停止的容器，一个命令即可清空所有已停止容器：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container prune</span><br></pre></td></tr></table></figure>
-<h4 id="7-导出容器快照"><a class="header-anchor" href="#7-导出容器快照">¶</a>7、导出容器快照</h4>
-<p>类似镜像的导出，我们同样可以导出容器快照：</p>
+<h4 id="7-导出容器快照-不推荐"><a class="header-anchor" href="#7-导出容器快照-不推荐">¶</a><s>7、导出容器快照（不推荐）</s></h4>
+<p><s>类似镜像的导出，我们同样可以导出容器快照：</s></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker export my_ubuntu &gt; my_ubuntu.tar</span><br></pre></td></tr></table></figure>
-<p>容器快照会丢弃所有的历史记录和元数据信息，仅保存容器当时的快照状态。</p>
-<h4 id="8-导入容器快照"><a class="header-anchor" href="#8-导入容器快照">¶</a>8、导入容器快照</h4>
-<p>有了容器快照文件，即可将容器快照导入新的镜像中：</p>
+<p><s>容器快照会丢弃所有的历史记录和元数据信息，仅保存容器当时的快照状态。</s></p>
+<h4 id="8-导入容器快照-不推荐"><a class="header-anchor" href="#8-导入容器快照-不推荐">¶</a><s>8、导入容器快照（不推荐）</s></h4>
+<p><s>有了容器快照文件，即可将容器快照导入新的镜像中：</s></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker import my_ubuntu.tar my_ubuntu:1.0</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>my_ubuntu.tar</code>是容器快照。</li>
-<li><code>my_ubuntu:1.0</code>是新镜像名和标签TAG，若不写TAG，默认为<code>latest</code>。<br>
-注意，是导入到镜像中，而不是直接新建一个容器。</li>
+<li><s><code>my_ubuntu.tar</code>是容器快照。</s></li>
+<li><s><code>my_ubuntu:1.0</code>是新镜像名和标签TAG，若不写TAG，默认为<code>latest</code>。</s><br>
+<s>注意，是导入到镜像中，而不是直接新建一个容器。</s></li>
 </ul>
 <h4 id="9-挂载目录"><a class="header-anchor" href="#9-挂载目录">¶</a>9、挂载目录</h4>
 <p>当我们需要访问宿主机的数据时，就需要把宿主机目录挂载到容器中，在新建容器时使用<code>docker run -v</code>参数即可挂载目录，例如：</p>
@@ -620,20 +621,35 @@ $ docker run -it ubuntu bash</p>
 <h2 id="镜像制作"><a class="header-anchor" href="#镜像制作">¶</a>镜像制作</h2>
 <p>在<a href="https://hub.docker.com/" target="_blank" rel="noopener">Docker Hub</a>中，除了笔者举例的镜像，我们还可以搜索到其他很多高质量的镜像，例如<a href="https://hub.docker.com/_/ubuntu" target="_blank" rel="noopener">Ubuntu官方镜像</a>、<a href="https://hub.docker.com/r/tensorflow/tensorflow" target="_blank" rel="noopener">TensorFlow官方镜像</a>等等。有了这些镜像，我们就没有必要重复造轮子，若这些镜像无法完全满足需求，我们只需要基于这些镜像做一些定制化的修改即可。</p>
 <h3 id="一-理解commit"><a class="header-anchor" href="#一-理解commit">¶</a>一、理解commit</h3>
-<p>有一种很直观的镜像制作思路：根据某个镜像运行容器，在容器中执行命令，比如安装某些程序、保存某些数据，最后保存容器快照，下次导入容器快照到新的镜像即可。</p>
-<p>同样的思路我们也可以用<code>docker commit</code>命令完成，但这种操作是<strong>不可取</strong>的，因为在容器中的每一次操作我们都可能产生很多临时文件，造成镜像越来越臃肿，而且每次操作无法回溯，我们很难知道这个镜像到底执行过什么命令，导致镜像难以维护。</p>
+<p>镜像的制作，有一种最简单快速的方式是<code>docker commit</code>，只需在某个镜像基础上，启动容器，并在容器中安装自己需要的环境，即可将此容器commit到一个新的镜像中。</p>
+<p>基本语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit [可选项] 容器 [镜像[:标签]]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>可选项</code>包括：<br>
+-a (–author string): 镜像制作者信息，如&quot;<a href="http://chason.me">chason.me</a>&quot;<br>
+-c (–change list): 使用Dockerfile指令来创建镜像<br>
+-m (–message string): 提交时的说明信息<br>
+-p (–pause): 在commit时，将容器暂停，默认为True</li>
+<li><code>容器</code>可以写容器名活容器ID</li>
+<li><code>镜像[:标签]</code>代表你要新建的镜像和标签名</li>
+</ul>
+<p>假如我们已经在容器<code>my_ubuntu</code>中安装好一切需要的环境，退出容器后，执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -a &quot;chason.me&quot; -m &quot;new environment&quot; my_ubuntu chason_env:latest</span><br></pre></td></tr></table></figure>
+<p>即可创建一个名为<code>chason_env:latest</code>镜像，<a href="http://chason.me/docker-tutorial/#4-%E5%AF%BC%E5%87%BA%E9%95%9C%E5%83%8F">导出此镜像</a>即可将环境迁移至其他机器使用。</p>
+<p>需要提醒的是，<code>docker commit</code>虽然很方便，但并<strong>不推荐</strong>使用，因为在容器中的每一次操作我们都可能产生很多临时文件，造成镜像越来越臃肿，而且每次操作无法回溯，我们很难知道这个镜像到底执行过什么命令，导致镜像难以维护。</p>
+<p>那是否存在一种方法能让镜像的修改操作透明、同时又能解决臃肿问题呢？当然有，答案就是<strong>Dockerfile</strong>！</p>
 <h3 id="二-学习dockerfile"><a class="header-anchor" href="#二-学习dockerfile">¶</a>二、学习Dockerfile</h3>
-<p>那是否一种方法能使得镜像的修改操作透明、同时又能解决臃肿问题呢？当然有，答案就是<strong>Dockerfile</strong>。Dockerfile是一个文本文件，包含了镜像构建的所有命令，通过修改Dockerfile中的命令，就能定制化自己想要的镜像。Dockerfile里面每一个指令都会构建一层镜像，层层叠加最终得到定制化镜像。</p>
+<p>Dockerfile是一个文本文件，包含了镜像构建的所有命令，通过修改Dockerfile中的命令，就能定制化自己想要的镜像。Dockerfile里面每一个指令都会构建一层镜像，层层叠加最终得到定制化镜像。</p>
 <h4 id="1-基本指令"><a class="header-anchor" href="#1-基本指令">¶</a>1、基本指令</h4>
 <p>让我们重新回到原来的例子，<code>chasonlee/ubuntu_demo</code>镜像是如何构建的呢？</p>
 <p>首先我们在本地新建一个文件夹，专门存放Dockerfile和其他所需文件，并在里面新建<code>my_clock.py</code>程序以及<code>Dockerfile</code>文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir my_docker</span><br><span class="line">cd my_docker</span><br><span class="line">vim my_clock.py</span><br></pre></td></tr></table></figure>
 <p>在Python文件中输入持续打印当前时间的代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># coding: utf-8</span><br><span class="line">import time</span><br><span class="line">while True:</span><br><span class="line">    print (time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;, time.localtime()))</span><br><span class="line">    time.sleep(1)</span><br></pre></td></tr></table></figure>
-<p>新建Dockerfile文件：</p>
+<p>保存代码后，在同样的目录下新建Dockerfile文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim Dockerfile</span><br></pre></td></tr></table></figure>
 <p>输入以下Dockerfile指令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:16.04</span><br><span class="line">ENV WORK_DIR=/workspace</span><br><span class="line">COPY . $&#123;WORK_DIR&#125;</span><br><span class="line">WORKDIR $&#123;WORK_DIR&#125;</span><br><span class="line">RUN apt update \</span><br><span class="line">	&amp;&amp; apt install -y python3 \</span><br><span class="line">	&amp;&amp; apt install -y htop \</span><br><span class="line">	&amp;&amp; apt install -y tzdata \</span><br><span class="line">	&amp;&amp; apt-get clean \</span><br><span class="line">	&amp;&amp; apt-get autoclean \</span><br><span class="line">	&amp;&amp; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \</span><br><span class="line">	&amp;&amp; ln -s /usr/bin/python3 /usr/bin/python \</span><br><span class="line">	&amp;&amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \</span><br><span class="line">	&amp;&amp; echo &apos;Asia/Shanghai&apos; &gt;/etc/timezone \</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:16.04</span><br><span class="line">ENV WORK_DIR=/workspace</span><br><span class="line">WORKDIR $&#123;WORK_DIR&#125;</span><br><span class="line">COPY . $&#123;WORK_DIR&#125;</span><br><span class="line">RUN apt update \</span><br><span class="line">	&amp;&amp; apt install -y python3 \</span><br><span class="line">	&amp;&amp; apt install -y htop \</span><br><span class="line">	&amp;&amp; apt install -y tzdata \</span><br><span class="line">	&amp;&amp; apt-get clean \</span><br><span class="line">	&amp;&amp; apt-get autoclean \</span><br><span class="line">	&amp;&amp; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \</span><br><span class="line">	&amp;&amp; ln -s /usr/bin/python3 /usr/bin/python \</span><br><span class="line">	&amp;&amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \</span><br><span class="line">	&amp;&amp; echo &apos;Asia/Shanghai&apos; &gt;/etc/timezone \</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>FROM</code>指令代表基于哪个镜像进行修改，第一条指令必须是<code>FROM</code>指令，若我们不想基于任何镜像，可以写<code>FROM scratch</code>即可完全从零开始构建镜像。</li>
 <li><code>ENV</code>指令可以创建环境变量，比如<code>WORK_DIR</code>工作目录环境变量，后面就能通过<code>${WORK_DIR}</code>调用环境变量的值。</li>
@@ -645,8 +661,8 @@ $ docker run -it ubuntu bash</p>
 <ol>
 <li>首先是基于<code>ubuntu:16.04</code>镜像开始构建</li>
 <li>设置环境变量WORK_DIR为<code>/workspace</code></li>
-<li>复制宿主机当前目录所有文件到镜像WORK_DIR目录中，包含<code>Dockerfile</code>和<code>my_clock.py</code></li>
 <li>设置工作目录为WORK_DIR</li>
+<li>复制宿主机当前目录所有文件到镜像WORK_DIR目录中，包含<code>Dockerfile</code>和<code>my_clock.py</code></li>
 <li>更新apt列表</li>
 <li>安装Python3，<code>-y</code>代表默认同意安装，这样就不需要手动输入y确认安装。</li>
 <li>安装htop工具</li>
@@ -836,8 +852,8 @@ $ docker run -it ubuntu bash</p>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/machine-learning-101/" rel="next" title="零基础机器学习入门">
-                <i class="fa fa-chevron-left"></i> 零基础机器学习入门
+              <a href="/how-to-display-images-in-the-terminal/" rel="next" title="如何在终端显示图片">
+                <i class="fa fa-chevron-left"></i> 如何在终端显示图片
               </a>
             
           </div>
@@ -998,7 +1014,7 @@ $ docker run -it ubuntu bash</p>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-text">¶简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解docker"><span class="nav-text">¶理解Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速上手docker"><span class="nav-text">¶快速上手Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-安装docker"><span class="nav-text">¶一、安装Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-镜像操作"><span class="nav-text">¶二、镜像操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-获取docker镜像"><span class="nav-text">¶1、获取Docker镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-查看本地镜像"><span class="nav-text">¶2、查看本地镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-删除镜像"><span class="nav-text">¶3、删除镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-导出镜像"><span class="nav-text">¶4、导出镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-导入镜像"><span class="nav-text">¶5、导入镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-修改镜像名称及标签"><span class="nav-text">¶6、修改镜像名称及标签</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-容器操作"><span class="nav-text">¶三、容器操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-新建并启动容器"><span class="nav-text">¶1、新建并启动容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-查看容器"><span class="nav-text">¶2、查看容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-进入容器"><span class="nav-text">¶3、进入容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-退出容器"><span class="nav-text">¶4、退出容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-启动停止容器"><span class="nav-text">¶5、启动停止容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-删除容器"><span class="nav-text">¶6、删除容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-导出容器快照"><span class="nav-text">¶7、导出容器快照</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-导入容器快照"><span class="nav-text">¶8、导入容器快照</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-挂载目录"><span class="nav-text">¶9、挂载目录</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#镜像制作"><span class="nav-text">¶镜像制作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-理解commit"><span class="nav-text">¶一、理解commit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-学习dockerfile"><span class="nav-text">¶二、学习Dockerfile</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基本指令"><span class="nav-text">¶1、基本指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-拓展指令"><span class="nav-text">¶2、拓展指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#add指令"><span class="nav-text">¶ADD指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cmd指令"><span class="nav-text">¶CMD指令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-构建镜像"><span class="nav-text">¶三、构建镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-hub使用"><span class="nav-text">¶Docker Hub使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-登陆登出docker-hub"><span class="nav-text">¶一、登陆登出Docker Hub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-上传镜像"><span class="nav-text">¶二、上传镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nvidia-docker"><span class="nav-text">¶nvidia-docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-卸载旧版nvidia-docker"><span class="nav-text">¶一、卸载旧版nvidia-docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-添加包源"><span class="nav-text">¶二、添加包源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-安装nvidia-docker2"><span class="nav-text">¶三、安装nvidia-docker2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-测试nvidia-docker"><span class="nav-text">¶四、测试nvidia-docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结束语"><span class="nav-text">¶结束语</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-text">¶简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解docker"><span class="nav-text">¶理解Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速上手docker"><span class="nav-text">¶快速上手Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-安装docker"><span class="nav-text">¶一、安装Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-镜像操作"><span class="nav-text">¶二、镜像操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-获取docker镜像"><span class="nav-text">¶1、获取Docker镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-查看本地镜像"><span class="nav-text">¶2、查看本地镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-删除镜像"><span class="nav-text">¶3、删除镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-导出镜像"><span class="nav-text">¶4、导出镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-导入镜像"><span class="nav-text">¶5、导入镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-修改镜像名称及标签"><span class="nav-text">¶6、修改镜像名称及标签</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-容器操作"><span class="nav-text">¶三、容器操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-新建并启动容器"><span class="nav-text">¶1、新建并启动容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-查看容器"><span class="nav-text">¶2、查看容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-进入容器"><span class="nav-text">¶3、进入容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-退出容器"><span class="nav-text">¶4、退出容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-启动停止容器"><span class="nav-text">¶5、启动停止容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-删除容器"><span class="nav-text">¶6、删除容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-导出容器快照-不推荐"><span class="nav-text">¶7、导出容器快照（不推荐）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-导入容器快照-不推荐"><span class="nav-text">¶8、导入容器快照（不推荐）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-挂载目录"><span class="nav-text">¶9、挂载目录</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#镜像制作"><span class="nav-text">¶镜像制作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-理解commit"><span class="nav-text">¶一、理解commit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-学习dockerfile"><span class="nav-text">¶二、学习Dockerfile</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基本指令"><span class="nav-text">¶1、基本指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-拓展指令"><span class="nav-text">¶2、拓展指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#add指令"><span class="nav-text">¶ADD指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cmd指令"><span class="nav-text">¶CMD指令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-构建镜像"><span class="nav-text">¶三、构建镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-hub使用"><span class="nav-text">¶Docker Hub使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-登陆登出docker-hub"><span class="nav-text">¶一、登陆登出Docker Hub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-上传镜像"><span class="nav-text">¶二、上传镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nvidia-docker"><span class="nav-text">¶nvidia-docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-卸载旧版nvidia-docker"><span class="nav-text">¶一、卸载旧版nvidia-docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-添加包源"><span class="nav-text">¶二、添加包源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-安装nvidia-docker2"><span class="nav-text">¶三、安装nvidia-docker2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-测试nvidia-docker"><span class="nav-text">¶四、测试nvidia-docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结束语"><span class="nav-text">¶结束语</span></a></li></ol></div>
             
 
           </div>
@@ -1022,7 +1038,7 @@ $ docker run -it ubuntu bash</p>
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
