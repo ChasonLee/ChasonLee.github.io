@@ -50,35 +50,6 @@
   </entry>
   
   <entry>
-    <title>如何在终端显示图片</title>
-    <link href="http://chason.me/how-to-display-images-in-the-terminal/"/>
-    <id>http://chason.me/how-to-display-images-in-the-terminal/</id>
-    <published>2019-05-07T16:00:00.000Z</published>
-    <updated>2019-05-19T14:45:24.259Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="概述"><a class="header-anchor" href="#概述">¶</a>概述</h2><p>是否遇到过这样的情况，你希望能查看服务器中的图片大致是什么样子，却只能通过终端SSH登陆服务器，而无法直接下载里面的图片到本地。本文介绍的工具<a href="https://github.com/stefanhaustein/TerminalImageViewer" target="_blank" rel="noopener">Terminal Image Viewer</a>就能在终端命令行中显示图片，原理其实就是直接用色块打印出图片的内容，由于分辨率有限，只能近似地显示图片缩略图。</p><a id="more"></a><h2 id="安装"><a class="header-anchor" href="#安装">¶</a>安装</h2><p>根据官方的介绍，先用命令安装<code>imagemagick</code>，再用<code>make</code>编译安装：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install imagemagick || yum install ImageMagick</span><br><span class="line">git clone https://github.com/stefanhaustein/TerminalImageViewer.git</span><br><span class="line">cd TerminalImageViewer/src/main/cpp</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure><h2 id="使用"><a class="header-anchor" href="#使用">¶</a>使用</h2><p>命令行中直接输入tiv即可查看使用说明：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">usage: tiv [options] &lt;image&gt; [&lt;image&gt;...]</span><br><span class="line"></span><br><span class="line">  -0        : No block character adjustment, always use top half block char.</span><br><span class="line">  -256      : Use 256 color mode.</span><br><span class="line">  -c &lt;num&gt;  : Number of thumbnail columns in &apos;dir&apos; mode (3).</span><br><span class="line">  -d        : Force &apos;dir&apos; mode. Automatially selected for more than one input.</span><br><span class="line">  -f        : Force &apos;full&apos; mode. Automatically selected for one input.</span><br><span class="line">  -help     : Display this help text.</span><br><span class="line">  -h &lt;num&gt;  : Set the maximum height to &lt;num&gt; lines.</span><br><span class="line">  -w &lt;num&gt;  : Set the maximum width to &lt;num&gt; characters.</span><br></pre></td></tr></table></figure><p>例如：我想查看当前目录中，一个名为<code>n03792782_55532.JPEG</code>的图片：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tiv n03792782_55532.JPEG</span><br></pre></td></tr></table></figure><img src="/how-to-display-images-in-the-terminal/bike.jpg" title="显示效果"><img src="/how-to-display-images-in-the-terminal/src_bike.JPEG" title="原图"><p>使用通配符就可以同时显示多张图片:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tiv n03792782_555*</span><br></pre></td></tr></table></figure><img src="/how-to-display-images-in-the-terminal/bikes.jpg" title="显示效果"><p>另外两张原图：</p><img src="/how-to-display-images-in-the-terminal/src_bike1.JPEG" title="原图"><img src="/how-to-display-images-in-the-terminal/src_bike3.JPEG" title="原图"><p>从显示效果上看，文字等细节是看不清楚的，当成缩略图来看即可，掌握此工具即可在命令行中浏览图片缩略图，有需要的同学收藏起来吧。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;概述&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#概述&quot;&gt;¶&lt;/a&gt;概述&lt;/h2&gt;
-&lt;p&gt;是否遇到过这样的情况，你希望能查看服务器中的图片大致是什么样子，却只能通过终端SSH登陆服务器，而无法直接下载里面的图片到本地。本文介绍的工具&lt;a href=&quot;https://github.com/stefanhaustein/TerminalImageViewer&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Terminal Image Viewer&lt;/a&gt;就能在终端命令行中显示图片，原理其实就是直接用色块打印出图片的内容，由于分辨率有限，只能近似地显示图片缩略图。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://chason.me/categories/Linux/"/>
-    
-    
-      <category term="tiv" scheme="http://chason.me/tags/tiv/"/>
-    
-      <category term="SSH" scheme="http://chason.me/tags/SSH/"/>
-    
-      <category term="终端显示图片" scheme="http://chason.me/tags/%E7%BB%88%E7%AB%AF%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87/"/>
-    
-      <category term="Terminal Image Viewer" scheme="http://chason.me/tags/Terminal-Image-Viewer/"/>
-    
-  </entry>
-  
-  <entry>
     <title>零基础机器学习入门</title>
     <link href="http://chason.me/machine-learning-101/"/>
     <id>http://chason.me/machine-learning-101/</id>
@@ -97,6 +68,35 @@
     
     
       <category term="机器学习" scheme="http://chason.me/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何在终端显示图片</title>
+    <link href="http://chason.me/how-to-display-images-in-the-terminal/"/>
+    <id>http://chason.me/how-to-display-images-in-the-terminal/</id>
+    <published>2019-05-07T16:00:00.000Z</published>
+    <updated>2019-05-19T14:45:24.259Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="概述"><a class="header-anchor" href="#概述">¶</a>概述</h2><p>是否遇到过这样的情况，你希望能查看服务器中的图片大致是什么样子，却只能通过终端SSH登陆服务器，而无法直接下载里面的图片到本地。本文介绍的工具<a href="https://github.com/stefanhaustein/TerminalImageViewer" target="_blank" rel="noopener">Terminal Image Viewer</a>就能在终端命令行中显示图片，原理其实就是直接用色块打印出图片的内容，由于分辨率有限，只能近似地显示图片缩略图。</p><a id="more"></a><h2 id="安装"><a class="header-anchor" href="#安装">¶</a>安装</h2><p>根据官方的介绍，先用命令安装<code>imagemagick</code>，再用<code>make</code>编译安装：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install imagemagick || yum install ImageMagick</span><br><span class="line">git clone https://github.com/stefanhaustein/TerminalImageViewer.git</span><br><span class="line">cd TerminalImageViewer/src/main/cpp</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure><h2 id="使用"><a class="header-anchor" href="#使用">¶</a>使用</h2><p>命令行中直接输入tiv即可查看使用说明：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">usage: tiv [options] &lt;image&gt; [&lt;image&gt;...]</span><br><span class="line"></span><br><span class="line">  -0        : No block character adjustment, always use top half block char.</span><br><span class="line">  -256      : Use 256 color mode.</span><br><span class="line">  -c &lt;num&gt;  : Number of thumbnail columns in &apos;dir&apos; mode (3).</span><br><span class="line">  -d        : Force &apos;dir&apos; mode. Automatially selected for more than one input.</span><br><span class="line">  -f        : Force &apos;full&apos; mode. Automatically selected for one input.</span><br><span class="line">  -help     : Display this help text.</span><br><span class="line">  -h &lt;num&gt;  : Set the maximum height to &lt;num&gt; lines.</span><br><span class="line">  -w &lt;num&gt;  : Set the maximum width to &lt;num&gt; characters.</span><br></pre></td></tr></table></figure><p>例如：我想查看当前目录中，一个名为<code>n03792782_55532.JPEG</code>的图片：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tiv n03792782_55532.JPEG</span><br></pre></td></tr></table></figure><img src="/how-to-display-images-in-the-terminal/bike.jpg" title="显示效果"><img src="/how-to-display-images-in-the-terminal/src_bike.JPEG" title="原图"><p>使用通配符就可以同时显示多张图片:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tiv n03792782_555*</span><br></pre></td></tr></table></figure><img src="/how-to-display-images-in-the-terminal/bikes.jpg" title="显示效果"><p>另外两张原图：</p><img src="/how-to-display-images-in-the-terminal/src_bike1.JPEG" title="原图"><img src="/how-to-display-images-in-the-terminal/src_bike3.JPEG" title="原图"><p>从显示效果上看，文字等细节是看不清楚的，当成缩略图来看即可，掌握此工具即可在命令行中浏览图片缩略图，有需要的同学收藏起来吧。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;概述&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#概述&quot;&gt;¶&lt;/a&gt;概述&lt;/h2&gt;
+&lt;p&gt;是否遇到过这样的情况，你希望能查看服务器中的图片大致是什么样子，却只能通过终端SSH登陆服务器，而无法直接下载里面的图片到本地。本文介绍的工具&lt;a href=&quot;https://github.com/stefanhaustein/TerminalImageViewer&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Terminal Image Viewer&lt;/a&gt;就能在终端命令行中显示图片，原理其实就是直接用色块打印出图片的内容，由于分辨率有限，只能近似地显示图片缩略图。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://chason.me/categories/Linux/"/>
+    
+    
+      <category term="SSH" scheme="http://chason.me/tags/SSH/"/>
+    
+      <category term="tiv" scheme="http://chason.me/tags/tiv/"/>
+    
+      <category term="终端显示图片" scheme="http://chason.me/tags/%E7%BB%88%E7%AB%AF%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87/"/>
+    
+      <category term="Terminal Image Viewer" scheme="http://chason.me/tags/Terminal-Image-Viewer/"/>
     
   </entry>
   
@@ -247,9 +247,9 @@
       <category term="Linux" scheme="http://chason.me/categories/Linux/"/>
     
     
-      <category term="SSH" scheme="http://chason.me/tags/SSH/"/>
-    
       <category term="screen" scheme="http://chason.me/tags/screen/"/>
+    
+      <category term="SSH" scheme="http://chason.me/tags/SSH/"/>
     
       <category term="VPS" scheme="http://chason.me/tags/VPS/"/>
     
