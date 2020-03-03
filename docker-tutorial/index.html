@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://chason.me/docker-tutorial/enter_docker.jpg">
 <meta property="og:image" content="http://chason.me/docker-tutorial/run_clock.jpg">
 <meta property="og:image" content="http://chason.me/docker-tutorial/htop.jpg">
-<meta property="og:updated_time" content="2020-02-29T09:52:32.489Z">
+<meta property="og:updated_time" content="2020-03-03T00:44:46.478Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker超详细教程">
 <meta name="twitter:description" content="¶简介 Docker的诞生，让应用的部署变得前所未有的高效，它能将应用及其依赖项打包成容器分发部署，从而保证了应用运行环境的一致性。Docker容器其实是一种比虚拟机更轻量的技术，容器中的进程直接运行在宿主机的内核，其启动速度十分快，基本可以做到秒级启动，并不像虚拟机那样对硬件进行模拟，并在之上运行一整套操作系统，所以容器相比虚拟机更为轻便。">
@@ -630,14 +630,14 @@ $ docker run -it ubuntu bash</p>
 -c (–change list): 使用Dockerfile指令来创建镜像<br>
 -m (–message string): 提交时的说明信息<br>
 -p (–pause): 在commit时，将容器暂停，默认为True</li>
-<li><code>容器</code>可以写容器名活容器ID</li>
+<li><code>容器</code>可以写容器名或容器ID</li>
 <li><code>镜像[:标签]</code>代表你要新建的镜像和标签名</li>
 </ul>
 <p>假如我们已经在容器<code>my_ubuntu</code>中安装好一切需要的环境，退出容器后，执行：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -a &quot;chason.me&quot; -m &quot;new environment&quot; my_ubuntu chason_env:latest</span><br></pre></td></tr></table></figure>
 <p>即可创建一个名为<code>chason_env:latest</code>镜像，<a href="http://chason.me/docker-tutorial/#4-%E5%AF%BC%E5%87%BA%E9%95%9C%E5%83%8F">导出此镜像</a>即可将环境迁移至其他机器使用。</p>
 <p>需要提醒的是，<code>docker commit</code>虽然很方便，但并<strong>不推荐</strong>使用，因为在容器中的每一次操作我们都可能产生很多临时文件，造成镜像越来越臃肿，而且每次操作无法回溯，我们很难知道这个镜像到底执行过什么命令，导致镜像难以维护。</p>
-<p>那是否存在一种方法能让镜像的修改操作透明、同时又能解决臃肿问题呢？当然有，答案就是<strong>Dockerfile</strong>！</p>
+<p>那是否存在一种方法，能让镜像的修改操作透明、同时又能解决臃肿问题呢？当然有，答案就是<strong>Dockerfile</strong>！</p>
 <h3 id="二-学习dockerfile"><a class="header-anchor" href="#二-学习dockerfile">¶</a>二、学习Dockerfile</h3>
 <p>Dockerfile是一个文本文件，包含了镜像构建的所有命令，通过修改Dockerfile中的命令，就能定制化自己想要的镜像。Dockerfile里面每一个指令都会构建一层镜像，层层叠加最终得到定制化镜像。</p>
 <h4 id="1-基本指令"><a class="header-anchor" href="#1-基本指令">¶</a>1、基本指令</h4>
