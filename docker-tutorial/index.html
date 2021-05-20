@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Ubuntu,Docker,镜像,容器,CUDA,深度学习,">
+  <meta name="keywords" content="Docker,Ubuntu,镜像,容器,CUDA,深度学习,">
 
 
 
@@ -90,21 +90,21 @@
 
 
 <meta name="description" content="¶简介 Docker的诞生，让应用的部署变得前所未有的高效，它能将应用及其依赖项打包成容器分发部署，从而保证了应用运行环境的一致性。Docker容器其实是一种比虚拟机更轻量的技术，容器中的进程直接运行在宿主机的内核，其启动速度十分快，基本可以做到秒级启动，并不像虚拟机那样对硬件进行模拟，并在之上运行一整套操作系统，所以容器相比虚拟机更为轻便。">
-<meta name="keywords" content="Ubuntu,Docker,镜像,容器,CUDA,深度学习">
+<meta name="keywords" content="Docker,Ubuntu,镜像,容器,CUDA,深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker超详细教程">
-<meta property="og:url" content="http://chason.me/docker-tutorial/index.html">
+<meta property="og:url" content="http://chason.pro/docker-tutorial/index.html">
 <meta property="og:site_name" content="观星客">
 <meta property="og:description" content="¶简介 Docker的诞生，让应用的部署变得前所未有的高效，它能将应用及其依赖项打包成容器分发部署，从而保证了应用运行环境的一致性。Docker容器其实是一种比虚拟机更轻量的技术，容器中的进程直接运行在宿主机的内核，其启动速度十分快，基本可以做到秒级启动，并不像虚拟机那样对硬件进行模拟，并在之上运行一整套操作系统，所以容器相比虚拟机更为轻便。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://chason.me/docker-tutorial/enter_docker.jpg">
-<meta property="og:image" content="http://chason.me/docker-tutorial/run_clock.jpg">
-<meta property="og:image" content="http://chason.me/docker-tutorial/htop.jpg">
-<meta property="og:updated_time" content="2020-03-03T00:44:46.478Z">
+<meta property="og:image" content="http://chason.pro/docker-tutorial/enter_docker.jpg">
+<meta property="og:image" content="http://chason.pro/docker-tutorial/run_clock.jpg">
+<meta property="og:image" content="http://chason.pro/docker-tutorial/htop.jpg">
+<meta property="og:updated_time" content="2021-05-20T17:26:56.682Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker超详细教程">
 <meta name="twitter:description" content="¶简介 Docker的诞生，让应用的部署变得前所未有的高效，它能将应用及其依赖项打包成容器分发部署，从而保证了应用运行环境的一致性。Docker容器其实是一种比虚拟机更轻量的技术，容器中的进程直接运行在宿主机的内核，其启动速度十分快，基本可以做到秒级启动，并不像虚拟机那样对硬件进行模拟，并在之上运行一整套操作系统，所以容器相比虚拟机更为轻便。">
-<meta name="twitter:image" content="http://chason.me/docker-tutorial/enter_docker.jpg">
+<meta name="twitter:image" content="http://chason.pro/docker-tutorial/enter_docker.jpg">
 
 
 
@@ -132,7 +132,7 @@
 
 
 
-  <link rel="canonical" href="http://chason.me/docker-tutorial/">
+  <link rel="canonical" href="http://chason.pro/docker-tutorial/">
 
 
 
@@ -329,7 +329,7 @@
   
 
   <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://chason.me/docker-tutorial/">
+    <link itemprop="mainEntityOfPage" href="http://chason.pro/docker-tutorial/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chason Lee">
@@ -523,10 +523,14 @@ $ docker run -it ubuntu bash</p>
 <li><code>-o</code>参数后面接着输出文件名。</li>
 <li><code>chasonlee/ubuntu_demo</code>是需要导出的镜像名。</li>
 </ul>
-<p>注意：这里只是导出一个静态的镜像，根据当前镜像启动的容器环境并不能直接导出，如果需要迁移当前容器的环境，还需要先使用<code>commit</code>命令自行制作一个镜像再导出，详情可跳转到<a href="http://chason.me/docker-tutorial/#%E4%B8%80-%E7%90%86%E8%A7%A3commit">理解commit</a>章节阅读。</p>
+<p>注意：这里只是导出一个静态的镜像，根据当前镜像启动的容器环境并不能直接导出，如果需要迁移当前容器的环境，还需要先使用<code>commit</code>命令自行制作一个镜像再导出，详情可跳转到<a href="http://chason.me/docker-tutorial/#%E4%B8%80-%E7%90%86%E8%A7%A3commit" target="_blank" rel="noopener">理解commit</a>章节阅读。</p>
+<p>假如镜像文件很大，可以直接压缩导出镜像：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save chasonlee/ubuntu_demo:latest | gzip &gt; ubuntu_demo.tar.gz</span><br></pre></td></tr></table></figure>
 <h4 id="5-导入镜像"><a class="header-anchor" href="#5-导入镜像">¶</a><em>5、导入镜像</em></h4>
 <p>然后拷贝此镜像文件到目标环境中，并导入镜像：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i ubuntu_demo.tar</span><br></pre></td></tr></table></figure>
+<p>或者直接导入压缩后的镜像：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gunzip -c ubuntu_demo.tar.gz | docker load</span><br></pre></td></tr></table></figure>
 <p>导入后可以即可通过<code>docker images</code>查看镜像。</p>
 <h4 id="6-修改镜像名称及标签"><a class="header-anchor" href="#6-修改镜像名称及标签">¶</a>6、修改镜像名称及标签</h4>
 <p>如果我们想把镜像名称改为<code>ubuntu_chason:1.0</code>，则执行：</p>
@@ -574,7 +578,7 @@ $ docker run -it ubuntu bash</p>
 <img src="/docker-tutorial/run_clock.jpg" title="在容器中执行Python程序">
 <p>我还在容器中安装了<code>htop</code>工具，用于查看CPU、内存使用情况，执行<code>htop</code>即可查看：</p>
 <img src="/docker-tutorial/htop.jpg" title="在容器中运行预装的htop工具">
-<p>简单的程序可以如上直接在容器中运行，虽然我们在运行容器时加入了<code>-d</code>参数能保持程序一直运行，但我们无法在重新进入容器时看到程序以前输出的结果。如果需要长时间保持程序的运行，笔者还是推荐在容器中使用tmux，<a href="http://chason.me/tmux-tutorial/">tmux教程在这里</a>。</p>
+<p>简单的程序可以如上直接在容器中运行，虽然我们在运行容器时加入了<code>-d</code>参数能保持程序一直运行，但我们无法在重新进入容器时看到程序以前输出的结果。如果需要长时间保持程序的运行，笔者还是推荐在容器中使用tmux，<a href="http://chason.me/tmux-tutorial/" target="_blank" rel="noopener">tmux教程在这里</a>。</p>
 <h4 id="4-退出容器"><a class="header-anchor" href="#4-退出容器">¶</a>4、退出容器</h4>
 <p>退出容器很简单，直接执行：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
@@ -626,7 +630,7 @@ $ docker run -it ubuntu bash</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit [可选项] 容器 [镜像[:标签]]</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>可选项</code>包括：<br>
--a (–author string): 镜像制作者信息，如&quot;<a href="http://chason.me">chason.me</a>&quot;<br>
+-a (–author string): 镜像制作者信息，如&quot;<a href="http://chason.me" target="_blank" rel="noopener">chason.me</a>&quot;<br>
 -c (–change list): 使用Dockerfile指令来创建镜像<br>
 -m (–message string): 提交时的说明信息<br>
 -p (–pause): 在commit时，将容器暂停，默认为True</li>
@@ -635,7 +639,7 @@ $ docker run -it ubuntu bash</p>
 </ul>
 <p>假如我们已经在容器<code>my_ubuntu</code>中安装好一切需要的环境，退出容器后，执行：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -a &quot;chason.me&quot; -m &quot;new environment&quot; my_ubuntu chason_env:latest</span><br></pre></td></tr></table></figure>
-<p>即可创建一个名为<code>chason_env:latest</code>镜像，<a href="http://chason.me/docker-tutorial/#4-%E5%AF%BC%E5%87%BA%E9%95%9C%E5%83%8F">导出此镜像</a>即可将环境迁移至其他机器使用。</p>
+<p>即可创建一个名为<code>chason_env:latest</code>镜像，<a href="http://chason.me/docker-tutorial/#4-%E5%AF%BC%E5%87%BA%E9%95%9C%E5%83%8F" target="_blank" rel="noopener">导出此镜像</a>即可将环境迁移至其他机器使用。</p>
 <p>需要提醒的是，<code>docker commit</code>虽然很方便，但并<strong>不推荐</strong>使用，因为在容器中的每一次操作我们都可能产生很多临时文件，造成镜像越来越臃肿，而且每次操作无法回溯，我们很难知道这个镜像到底执行过什么命令，导致镜像难以维护。</p>
 <p>那是否存在一种方法，能让镜像的修改操作透明、同时又能解决臃肿问题呢？当然有，答案就是<strong>Dockerfile</strong>！</p>
 <h3 id="二-学习dockerfile"><a class="header-anchor" href="#二-学习dockerfile">¶</a>二、学习Dockerfile</h3>
@@ -727,13 +731,13 @@ $ docker run -it ubuntu bash</p>
 <p>与下载镜像<code>pull</code>相反，上传镜像用<code>push</code>命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push &lt;user name&gt;/ubuntu_demo:latest</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>&lt;user name&gt;</code>是自己的用户名，如果构建镜像时，镜像名称前面忘记加用户名，请用<a href="http://chason.me/docker-tutorial/#6-%E4%BF%AE%E6%94%B9%E9%95%9C%E5%83%8F%E5%90%8D%E7%A7%B0%E5%8F%8A%E6%A0%87%E7%AD%BE"><code>docker tag</code></a>命令修改。</li>
+<li><code>&lt;user name&gt;</code>是自己的用户名，如果构建镜像时，镜像名称前面忘记加用户名，请用<a href="http://chason.me/docker-tutorial/#6-%E4%BF%AE%E6%94%B9%E9%95%9C%E5%83%8F%E5%90%8D%E7%A7%B0%E5%8F%8A%E6%A0%87%E7%AD%BE" target="_blank" rel="noopener"><code>docker tag</code></a>命令修改。</li>
 </ul>
 <p>镜像上传需要一定时间，取决于镜像大小和网速。上传成功后镜像默认存在私有仓库中，在<code>Setting</code>中<code>Make public</code>即可转为公开的仓库。</p>
 <hr>
 <h2 id="nvidia-docker"><a class="header-anchor" href="#nvidia-docker">¶</a>nvidia-docker</h2>
-<p>Docker支持CUDA环境的隔绝，这是深度学习算法框架使用者的福音，因为TensorFlow的不同版本可能需要不同CUDA版本，这导致无法用<a href="http://chason.me/virtualenv-tutorial/">virtualenv</a>在同一台机安装多个版本跨度较大的TensorFlow，有了Docker，这种问题就能迎刃而解。</p>
-<p>基于前面的内容，读者可能会发现，在之前启动的Docker容器里面并不能执行<code>nvidia-smi</code>命令，无法使用GPU版本的TensorFlow或PyTorch。不用着急，现在我们开始学习如何配置一个带NVIDIA的Docker，只需在<a href="http://chason.me/docker-tutorial/#%E4%B8%80-%E5%AE%89%E8%A3%85docker">安装Docker</a>的基础之上，继续安装nvidia-docker2即可，具体可参考<a href="https://github.com/NVIDIA/nvidia-docker" target="_blank" rel="noopener">nvidia-docker说明</a>，主要包含以下几个步骤：</p>
+<p>Docker支持CUDA环境的隔绝，这是深度学习算法框架使用者的福音，因为TensorFlow的不同版本可能需要不同CUDA版本，这导致无法用<a href="http://chason.me/virtualenv-tutorial/" target="_blank" rel="noopener">virtualenv</a>在同一台机安装多个版本跨度较大的TensorFlow，有了Docker，这种问题就能迎刃而解。</p>
+<p>基于前面的内容，读者可能会发现，在之前启动的Docker容器里面并不能执行<code>nvidia-smi</code>命令，无法使用GPU版本的TensorFlow或PyTorch。不用着急，现在我们开始学习如何配置一个带NVIDIA的Docker，只需在<a href="http://chason.me/docker-tutorial/#%E4%B8%80-%E5%AE%89%E8%A3%85docker" target="_blank" rel="noopener">安装Docker</a>的基础之上，继续安装nvidia-docker2即可，具体可参考<a href="https://github.com/NVIDIA/nvidia-docker" target="_blank" rel="noopener">nvidia-docker说明</a>，主要包含以下几个步骤：</p>
 <h3 id="一-卸载旧版nvidia-docker"><a class="header-anchor" href="#一-卸载旧版nvidia-docker">¶</a>一、卸载旧版nvidia-docker</h3>
 <blockquote>
 <p>If you have nvidia-docker 1.0 installed: we need to remove it and all existing GPU containers</p>
@@ -813,7 +817,7 @@ $ docker run -it ubuntu bash</p>
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://chason.me/docker-tutorial/" title="Docker超详细教程">http://chason.me/docker-tutorial/</a>
+      <a href="http://chason.pro/docker-tutorial/" title="Docker超详细教程">http://chason.pro/docker-tutorial/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -829,9 +833,9 @@ $ docker run -it ubuntu bash</p>
       
         <div class="post-tags">
           
-            <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
-          
             <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+            <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
           
             <a href="/tags/镜像/" rel="tag"># 镜像</a>
           
@@ -1038,7 +1042,7 @@ $ docker run -it ubuntu bash</p>
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
